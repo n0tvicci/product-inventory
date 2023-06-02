@@ -14,6 +14,7 @@ export default function EditProduct() {
     unit: "",
     price: "",
     quantity: "",
+    loading: false,
   });
   const [expirationDate, setExpirationDate] = useState(dayjs("2023-04-17"));
 
@@ -68,6 +69,7 @@ export default function EditProduct() {
       dangerMode: true,
     }).then((willUpdate) => {
       if (willUpdate) {
+        setValues({ ...values, loading: true });
         const initialize = async () => {
           try {
             await updateProduct({
@@ -85,9 +87,11 @@ export default function EditProduct() {
               },
               dangerMode: true,
             }).then(() => {
+              setValues({ ...values, loading: false });
               navigate("/dashboard");
             });
           } catch (error) {
+            setValues({ ...values, loading: false });
             return swal("Oops!", `${error.message}`, "error");
           }
         };

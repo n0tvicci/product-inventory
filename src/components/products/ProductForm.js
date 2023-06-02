@@ -11,6 +11,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { CircularProgress } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -160,7 +161,15 @@ export default function ProductForm({
           </Grid>
           <Grid item xs={12}>
             <Stack spacing={2} direction="row">
-              <Button variant="contained" type="submit">
+              <Button
+                variant="contained"
+                type="submit"
+                startIcon={
+                  values.loading && (
+                    <CircularProgress size={20} color="warning" />
+                  )
+                }
+              >
                 {id ? "Update" : "Submit"}
               </Button>
             </Stack>

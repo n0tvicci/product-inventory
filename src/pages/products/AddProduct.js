@@ -13,6 +13,7 @@ export default function AddProduct() {
     unit: "",
     price: "",
     quantity: "",
+    loading: false,
   });
   const [expirationDate, setExpirationDate] = useState(dayjs("2023-04-17"));
 
@@ -64,6 +65,7 @@ export default function AddProduct() {
       dangerMode: true,
     }).then((willUpdate) => {
       if (willUpdate) {
+        setValues({ ...values, loading: true });
         const initialize = async () => {
           try {
             await createProduct({
@@ -80,9 +82,11 @@ export default function AddProduct() {
               },
               dangerMode: true,
             }).then(() => {
+              setValues({ ...values, loading: false });
               navigate("/dashboard");
             });
           } catch (error) {
+            setValues({ ...values, loading: false });
             return swal("Oops!", `${error.message}`, "error");
           }
         };
