@@ -11,6 +11,7 @@ import {
   IconButton,
   Card,
   Box,
+  Alert,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material/";
 import { CircularProgress } from "@mui/material";
@@ -93,6 +94,9 @@ export default function Login() {
         <Typography variant="h5" color="text.primary" sx={{ margin: "15px" }}>
           SIGN-IN
         </Typography>
+        <Alert severity="info" sx={{ m: 1 }}>
+          Deployed on a free tier service. Might take time to load
+        </Alert>
         <form onSubmit={handleSubmit}>
           <Box sx={loginForm}>
             <TextField
